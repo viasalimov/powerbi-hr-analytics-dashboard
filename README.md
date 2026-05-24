@@ -125,10 +125,8 @@ hr-analytics-dashboard/
 │   └── HR_Analytics_Dashboard.pbix
 ├── data/
 │   └── employees_data.csv
-├── docs/
-│   ├── Analytical_Report_EN.md
-│   ├── Original_Report_RU.docx
-│   └── Dashboard_Screenshots.docx
+├── report/
+│   └── HR_Analytics_Dashboard_Report.pdf
 ├── screenshots/
 │   ├── dashboard_top.png
 │   ├── dashboard_middle.png

@@ -1,33 +1,30 @@
 # HR Analytics Dashboard | Power BI
 
-This project presents an HR analytics dashboard built in Power BI using an employee dataset. The goal was to analyze workforce structure, salary distribution, employee performance, attrition patterns, and hiring trends.
+## Project Overview
 
-## Dashboard Preview
+This project is a multi-page Power BI HR Analytics report designed to analyze employee demographics, salary levels, performance scores, attrition, work experience, and hiring trends.
 
-![Dashboard Top](screenshots/dashboard_top.png)
+The report was built using an HR dataset with 1,000 employee records and includes three dedicated report pages:
 
-![Dashboard Middle](screenshots/dashboard_middle.png)
+1. **HR Analytics Overview** — overall workforce profile, KPIs, hiring trend, department, gender, and age group distribution.
+2. **Attrition Analysis** — employee attrition by salary level, gender, department, and experience years.
+3. **Salary & Performance** — salary patterns by department and job title, salary-performance relationship, and experience distribution by age group.
 
-![Dashboard Bottom](screenshots/dashboard_bottom.png)
+---
 
-## Project Objectives
+## Tools Used
 
-The dashboard was designed to answer the following HR business questions:
+- **Power BI** — dashboard development and data visualization
+- **Power Query** — data cleaning and transformation
+- **DAX** — calculated measures and KPI creation
+- **Data Modeling** — structured analytical model for HR metrics
+- **CSV Dataset** — source employee data
 
-1. Which department has the highest number of employees?
-2. Which department has the highest attrition rate?
-3. Which gender is more represented in the company?
-4. Which department has the highest average salary?
-5. Which department has the lowest average salary?
-6. Is there a relationship between salary and performance score?
-7. Which age group is the most common?
-8. Do younger or more experienced employees leave more often?
-9. How has employee hiring changed over time?
-10. Which salary level has the highest attrition?
+---
 
 ## Dataset
 
-The dataset contains 1,000 employee records with the following fields:
+The dataset contains employee-level HR information, including:
 
 | Column | Description |
 |---|---|
@@ -36,120 +33,136 @@ The dataset contains 1,000 employee records with the following fields:
 | Gender | Employee gender |
 | Age | Employee age |
 | Department | Employee department |
-| JobTitle | Employee job title |
-| HireDate | Date of hiring |
+| JobTitle | Employee role/title |
+| HireDate | Employee hiring date |
 | Salary | Annual salary in USD |
-| PerformanceScore | Employee performance score from 1 to 5 |
-| Attrition | Whether the employee left the company: Yes / No |
+| PerformanceScore | Employee performance rating |
+| Attrition | Whether the employee left the company |
+
+---
 
 ## Data Preparation
 
-The following data preparation steps were completed in Power Query / Power BI:
+The data was cleaned and transformed in Power Query before building the dashboard.
 
-- Removed duplicates by `EmployeeID`
-- Converted `HireDate` to date format
-- Created `ExperienceYears` based on years since hire date
+Main preparation steps:
+
+- Removed duplicate records based on `EmployeeID`
+- Converted `HireDate` into Date format
+- Created `ExperienceYears` to calculate employee tenure
 - Created `SalaryLevel` categories:
-  - Low: below $40,000
-  - Medium: $40,000–$70,000
-  - High: above $70,000
+  - Low: salary below $40,000
+  - Medium: salary between $40,000 and $70,000
+  - High: salary above $70,000
 - Created `AgeGroup` categories:
   - Young: 18–29
   - Middle Age: 30–44
   - Older: 45+
 
-## Key DAX Measures
+---
 
-```DAX
-Total Employees = COUNT(employees_data[EmployeeID])
+## DAX Measures
 
-Average Salary = AVERAGE(employees_data[Salary])
+The following DAX measures were created to support dashboard analysis:
 
-Total Attrition =
-CALCULATE(
-    COUNT(employees_data[EmployeeID]),
-    employees_data[Attrition] = "Yes"
-)
+- `Total Employees`
+- `Average Salary`
+- `Total Attrition`
+- `Attrition Rate`
+- `Average Experience Years`
+- `High Performance Employees`
+- `Average Salary by Performance Score`
+- `Female Percentage`
 
-Attrition Rate =
-DIVIDE([Total Attrition], [Total Employees])
+These measures were used to create KPI cards, attrition comparisons, salary analysis, and workforce segmentation.
 
-Avg Experience Years = AVERAGE(employees_data[ExperienceYears])
+---
 
-High Performance Employees =
-CALCULATE(
-    COUNT(employees_data[EmployeeID]),
-    employees_data[PerformanceScore] >= 4
-)
+## Dashboard Pages
 
-Female % =
-DIVIDE(
-    CALCULATE(COUNT(employees_data[EmployeeID]), employees_data[Gender] = "Female"),
-    [Total Employees]
-)
-```
+### 1. HR Analytics Overview
 
-## Dashboard Features
+This page provides a high-level summary of the workforce, including key HR KPIs, hiring trends, employee distribution by department, gender, and age group, as well as the top 10 highest-paid employees.
 
-The Power BI report includes:
+![HR Analytics Overview](screenshots/hr_analytics_overview.png)
 
-- KPI cards for total employees, average salary, attrition rate, average experience, and high performers
-- Slicers for Department, Gender, Age Group, Performance Score, and Salary Level
-- Hiring trend line chart by year
-- Employee distribution by department, gender, age, and age group
-- Salary analysis by department and job title
-- Attrition analysis by department, gender, salary level, and experience years
-- Scatter plot for Salary vs Performance Score
-- Boxplot for experience distribution by age group
-- Top 10 employees by salary table
+### 2. Attrition Analysis
+
+This page focuses on employee attrition patterns across salary levels, gender, departments, and years of experience. It helps identify which workforce segments show higher retention risk.
+
+![Attrition Analysis](screenshots/attrition_analysis.png)
+
+### 3. Salary & Performance
+
+This page analyzes salary distribution by job title and department, the relationship between salary and performance score, and experience distribution by age group.
+
+![Salary & Performance](screenshots/salary_performance.png)
+
+---
+
+## Key Metrics
+
+| Metric | Value |
+|---|---:|
+| Total Employees | 1,000 |
+| Average Salary | $55,369 |
+| Attrition Rate | 50.30% |
+| Average Experience Years | 11.46 |
+| High Performance Employees | 380 |
+
+---
 
 ## Key Insights
 
-- The company has 1,000 employees.
-- The average salary is approximately $55,369.
-- The overall attrition rate is 50.30%.
-- Marketing is the largest department with 211 employees.
-- Finance has the highest attrition rate at 54.00%.
-- HR has the highest average salary at approximately $57K.
-- Finance has the lowest average salary at approximately $53K.
-- Female employees represent 50.9% of the workforce, while male employees represent 49.1%.
-- The most common age group is Older, with 462 employees.
-- The relationship between salary and performance score appears weak based on the scatter plot and trend line.
-- By count, attrition is highest in the Medium salary group. By attrition rate, the Low salary group has the highest attrition rate.
+- The largest department is **Marketing**, with **211 employees** representing **21.1%** of the workforce.
+- The highest department-level attrition rate is in **Finance**, at **54.00%**.
+- Gender distribution is almost balanced, with **50.9% female** and **49.1% male** employees.
+- The highest average salary is in **HR**, at approximately **$57K**.
+- The lowest average salary is in **Finance**, at approximately **$53K**.
+- The most common age group is **Older (45+)**, with **462 employees**.
+- The highest attrition count is in the **Medium** salary group, while the highest attrition rate is in the **Low** salary group.
+- The relationship between salary and performance score appears weak, as salaries vary across all performance score levels and the trend line is almost flat.
+
+---
 
 ## Repository Structure
 
 ```text
-hr-analytics-dashboard/
+powerbi-hr-analytics-dashboard/
+│
+├── README.md
+├── .gitignore
+│
 ├── dashboard/
 │   └── HR_Analytics_Dashboard.pbix
+│
 ├── data/
 │   └── employees_data.csv
-├── report/
-│   └── HR_Analytics_Dashboard_Report.pdf
+│
 ├── screenshots/
-│   ├── dashboard_top.png
-│   ├── dashboard_middle.png
-│   └── dashboard_bottom.png
-├── .gitignore
-└── README.md
+│   ├── 01_hr_analytics_overview.png
+│   ├── 02_attrition_analysis.png
+│   └── 03_salary_performance.png
+│
+└── docs/
+    ├── Original_Report_RU.docx
+    └── claude_report_prompt.md
 ```
 
-## Tools Used
-
-- Power BI
-- Power Query
-- DAX
-- Data visualization
-- HR analytics
+---
 
 ## How to Open the Project
 
 1. Download or clone this repository.
 2. Open `dashboard/HR_Analytics_Dashboard.pbix` in Power BI Desktop.
-3. Review the data model, DAX measures, and dashboard visuals.
-4. Read the analytical report in `docs/Analytical_Report_EN.md`.
+3. Review the three report pages:
+   - HR Analytics Overview
+   - Attrition Analysis
+   - Salary & Performance
+4. Use slicers to filter the dashboard by department, gender, age group, performance score, and salary level.
 
-## Author
+---
 
-Alikhan Salimov
+## Project Summary
+
+This project demonstrates the use of Power BI for HR analytics and business intelligence reporting. It combines data cleaning, DAX measure creation, interactive visualization, and analytical storytelling to support workforce-related decision-making.

@@ -140,13 +140,12 @@ powerbi-hr-analytics-dashboard/
 │   └── employees_data.csv
 │
 ├── screenshots/
-│   ├── 01_hr_analytics_overview.png
-│   ├── 02_attrition_analysis.png
-│   └── 03_salary_performance.png
+│   ├── hr_analytics_overview.png
+│   ├── attrition_analysis.png
+│   └── salary_performance.png
 │
-└── docs/
-    ├── Original_Report_RU.docx
-    └── claude_report_prompt.md
+└── report/
+    └── HR_Analytics_Dashboard_Report.pdf
 ```
 
 ---
